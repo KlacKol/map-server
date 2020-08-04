@@ -1,0 +1,185 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Map App API",
+    "description": "Map App Restful API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/map/create": {
+      "post": {
+        "tags": [
+          "Map"
+        ],
+        "description": "Create new coordinates",
+        "parameters": [
+          {
+            "name": "map",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "properties": {
+                "lat": { "type": "number" },
+                "lng": { "type": "number" },
+                "description": { "type": "string" },
+                "date": { "type": "Date" }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully create new coordinates",
+            "schema": {
+              "$ref": "#/definitions/"
+            }
+          }
+        }
+      }
+    },
+    "/map": {
+      "get": {
+        "summary": "get all map coordinates",
+        "tags": [
+          "Map"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/map/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of map that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "summary": "get coordinates with id",
+        "tags": [
+          "Map"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete coordinates with id",
+        "tags": [
+          "Map"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "update coordinates with id",
+        "tags": [
+          "Map"
+        ],
+        "description": "Update coordinates",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Update",
+            "schema": {
+              "properties": {
+                "id": {"type": "string"},
+                "uniqueItems": true
+              }
+            }
+          },
+          {
+            "name": "map",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "properties": {
+                "lat": { "type": "number" },
+                "lng": { "type": "number" },
+                "description": { "type": "string" },
+                "date": { "type": "Date" }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully update"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Map": {
+      "required": [
+        "_id",
+        "lat",
+        "lng",
+        "description",
+        "date"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "lat": {
+          "type": "number"
+        },
+        "lng": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        },
+        "date": {
+          "type": "Date"
+        }
+      }
+    }
+  }
+}
