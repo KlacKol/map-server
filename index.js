@@ -5,12 +5,14 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger');
 const bodyParser = require('body-parser');
 import useControllers from './server/routes';
+import cors from 'cors';
 
 const PORT = config.get('port') || 5000;
 
 const app = express();
 
 app.use(bodyParser({extended: true}));
+app.use(cors());
 useControllers(app);
 
 async function start() {
@@ -26,7 +28,7 @@ async function start() {
             console.log('START ' + PORT)
         })
     } catch (e) {
-        console.log('Server error',  e.message)
+        console.log('Server error',  e.message);
         process.exit(1);
     }
 }
