@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {mapDelete, mapGetAll} from "../../services/map.service";
+import {mapDelete} from "../../services/map.service";
 const router = Router();
 
 router.delete("/:id", async (req,res) => {
@@ -10,7 +10,7 @@ router.delete("/:id", async (req,res) => {
         }
         return res.status(404).end();
     } catch (e) {
-        res.status(404).json({message: 'error delete'})
+        res.status(404).json({message: 'error delete-id'})
     }
 });
 

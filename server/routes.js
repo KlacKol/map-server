@@ -3,6 +3,7 @@ import mapGetOne from './controllers/map/mapGetOne';
 import mapUpdate from './controllers/map/mapUpdate';
 import mapPost from './controllers/map/mapPost';
 import mapDeleteOne from './controllers/map/mapDeleteOne';
+import mapDeleteAll from './controllers/map/mapDeleteAll';
 
 const connect = (app) => {
     app.use('/map', [
@@ -10,7 +11,8 @@ const connect = (app) => {
         mapGetOne,
         mapUpdate,
         mapPost,
-        mapDeleteOne
+        mapDeleteOne,
+        mapDeleteAll
     ])
 };
 

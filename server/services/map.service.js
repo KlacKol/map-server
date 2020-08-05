@@ -22,6 +22,10 @@ export const mapDelete = async (id) => {
     return await MapSchema.findOneAndDelete(id);
 };
 
+export const mapDeleteAll = async () => {
+    return await MapSchema.deleteMany({});
+};
+
 export const mapUpdate = async (id, data) => {
     return await MapSchema.findOneAndUpdate(id, data, {useFindAndModify: false, new: true});
 };
