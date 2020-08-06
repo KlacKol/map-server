@@ -4,6 +4,8 @@ import mapUpdate from './controllers/map/mapUpdate';
 import mapPost from './controllers/map/mapPost';
 import mapDeleteOne from './controllers/map/mapDeleteOne';
 import mapDeleteAll from './controllers/map/mapDeleteAll';
+import mapFakeDataGenerate from './controllers/map/mapFakeDataGenerate';
+import mapSearchDate from './controllers/map/mapSearchDate';
 
 const connect = (app) => {
     app.use('/map', [
@@ -12,7 +14,9 @@ const connect = (app) => {
         mapUpdate,
         mapPost,
         mapDeleteOne,
-        mapDeleteAll
+        mapDeleteAll,
+        mapFakeDataGenerate,
+        mapSearchDate
     ])
 };
 

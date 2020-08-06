@@ -21,7 +21,73 @@
     "application/json"
   ],
   "paths": {
+    "/map": {
+      "get": {
+        "summary": "get all map coordinates",
+        "tags": [
+          "Map"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Geo"
+            }
+          }
+        }
+      }
+    },
+    "/map/generate/random": {
+      "get": {
+        "summary": "create fake data",
+        "tags": [
+          "Map"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Geo"
+            }
+          }
+        }
+      }
+    },
     "/map/create": {
+      "post": {
+        "tags": [
+          "Map"
+        ],
+        "description": "Create new coordinates",
+        "parameters": [
+          {
+            "name": "map",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "properties": {
+                "lat": { "type": "number" },
+                "lng": { "type": "number" },
+                "description": { "type": "string" },
+                "date": { "type": "Date" }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully create new coordinates",
+            "schema": {
+              "$ref": "#/definitions/Geo"
+            }
+          }
+        }
+      }
+    },
+    "/map/search": {
       "post": {
         "tags": [
           "Map"
@@ -58,22 +124,6 @@
     "/map/delete/all": {
       "delete": {
         "summary": "delete all map coordinates",
-        "tags": [
-          "Map"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Geo"
-            }
-          }
-        }
-      }
-    },
-    "/map": {
-      "get": {
-        "summary": "get all map coordinates",
         "tags": [
           "Map"
         ],

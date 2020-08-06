@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node -r esm index.js",
     "dev": "nodemon -r esm index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fake": "node -r esm server/task/fakeGenerator.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,8 @@
     "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "geolocation-utils": "^1.2.3",
     "mongoose": "^5.9.27",
     "swagger-ui-express": "^4.1.4"
   }
