@@ -6,6 +6,8 @@ import mapDeleteOne from './controllers/map/mapDeleteOne';
 import mapDeleteAll from './controllers/map/mapDeleteAll';
 import mapFakeDataGenerate from './controllers/map/mapFakeDataGenerate';
 import mapSearchDate from './controllers/map/mapSearchDate';
+import registrationUser from './controllers/user/registration';
+import loginUser from './controllers/user/login';
 
 const connect = (app) => {
     app.use('/map', [
@@ -17,6 +19,10 @@ const connect = (app) => {
         mapDeleteAll,
         mapFakeDataGenerate,
         mapSearchDate
+    ]);
+    app.use('/auth', [
+        registrationUser,
+        loginUser
     ])
 };
 

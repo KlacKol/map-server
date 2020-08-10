@@ -3,27 +3,21 @@ import faker from "faker";
 import {insideBoundingBox} from "geolocation-utils";
 
 export const mapGetAll = async () => {
-    return await MapSchema.find({});
+    return MapSchema.find({});
 };
 
 export const mapGetOne = async (id) => {
-    return await MapSchema.findById(id);
+    return MapSchema.findById(id);
 };
 
 export const mapAdd = async (data) => {
-    const geo = new MapSchema({
-        lat: data.lat,
-        lng: data.lng,
-        description: data.description,
-        date: data.date,
-    });
-    return await geo.save();
+    return MapSchema.create(data);
 };
 
 export const mapFakeDataGenerate = async () => {
     const data = [];
 
-    for(let i = 0; i<10; i++) {
+    for(let i = 0; i<1000; i++) {
         let geo = new MapSchema({
             lat: faker.address.latitude(),
             lng: faker.address.longitude(),
@@ -32,7 +26,7 @@ export const mapFakeDataGenerate = async () => {
         });
         data.push(geo);
     }
-    return await MapSchema.create(data);
+    return MapSchema.create(data);
 };
 
 export const mapGetFilterDate = async (data) => {
@@ -48,15 +42,15 @@ export const mapGetFilterDate = async (data) => {
 };
 
 export const mapDelete = async (id) => {
-    return await MapSchema.deleteOne({
+    return MapSchema.deleteOne({
         _id: id
     });
 };
 
 export const mapDeleteAll = async () => {
-    return await MapSchema.deleteMany({});
+    return MapSchema.deleteMany({});
 };
 
 export const mapUpdate = async (id, data) => {
-    return await MapSchema.findOneAndUpdate(id, data, {useFindAndModify: false, new: true});
+    return MapSchema.findOneAndUpdate(id, data, {useFindAndModify: false, new: true});
 };

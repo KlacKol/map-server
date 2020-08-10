@@ -10,7 +10,7 @@ router.delete("/:id", async (req,res) => {
         }
         return res.status(404).end();
     } catch (e) {
-        res.status(404).json({message: 'error delete-id'})
+        res.status(404).json({message: `error delete-id: ${e}`})
     }
 });
 

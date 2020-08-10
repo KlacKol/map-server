@@ -187,13 +187,7 @@
             "required": true,
             "in": "path",
             "type": "string",
-            "description": "Update",
-            "schema": {
-              "properties": {
-                "id": {"type": "string"},
-                "uniqueItems": true
-              }
-            }
+            "description": "Update"
           },
           {
             "name": "map",
@@ -215,6 +209,74 @@
         "responses": {
           "200": {
             "description": "Successfully update"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Login user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "login",
+            "schema": {
+              "properties": {
+                "email": { "type": "string" },
+                "password": { "type": "string" },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully login",
+            "schema": {
+              "$ref": "#/definitions/Geo"
+            }
+          }
+        }
+      }
+    },
+    "/auth/registration": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Create new user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "properties": {
+                "email": { "type": "string" },
+                "password": { "type": "string" },
+                "name": { "type": "string" }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully create new user",
+            "schema": {
+              "$ref": "#/definitions/Geo"
+            }
           }
         }
       }
@@ -244,7 +306,32 @@
           "type": "string"
         },
         "date": {
-          "type": "Date"
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "required": [
+        "_id",
+        "email",
+        "password",
+        "name"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "uniqueItems": true
         }
       }
     }

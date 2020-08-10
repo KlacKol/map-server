@@ -10,7 +10,7 @@ router.delete("/delete/all", async (req,res) => {
         }
         return res.status(404).end();
     } catch (e) {
-        res.status(404).json({message: 'error delete all'})
+        res.status(404).json({message: `error delete all: ${e}`})
     }
 });
 

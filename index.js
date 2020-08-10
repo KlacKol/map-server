@@ -1,16 +1,18 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const config = require('config');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger');
-const bodyParser = require('body-parser');
+import express from 'express';
+import mongoose from 'mongoose';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import config from 'config';
+
 import useControllers from './server/routes';
 import cors from 'cors';
 
 const PORT = config.get('port') || 5000;
-
 const app = express();
-
+app.use(passport.initialize());
+require('./server/middlewares/passport')(passport);
 app.use(bodyParser({extended: true}));
 app.use(cors());
 useControllers(app);
@@ -20,7 +22,8 @@ async function start() {
         await mongoose.connect('mongodb://map:map@localhost:27017/history-map',
             {
                 useNewUrlParser: true,
-                useUnifiedTopology: true
+                useUnifiedTopology: true,
+                useCreateIndex: true
             }
             );
         app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

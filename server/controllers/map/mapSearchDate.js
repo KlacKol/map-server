@@ -7,7 +7,7 @@ router.post("/search", async (req,res) => {
         const data = await mapGetFilterDate(req.body);
         return res.status(200).json(data);
     } catch (e) {
-        res.status(404).json({message: 'error get'});
+        res.status(404).json({message: `error get search date: ${e}`});
     }
 });
 
