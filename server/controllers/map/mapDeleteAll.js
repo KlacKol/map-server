@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import {mapDeleteAll} from "../../services/map.service";
+import errorHandler from "../../utils/errorHandler";
 const router = Router();
 
 router.delete("/delete/all", async (req,res) => {
@@ -10,7 +11,7 @@ router.delete("/delete/all", async (req,res) => {
         }
         return res.status(404).end();
     } catch (e) {
-        res.status(404).json({message: `error delete all: ${e}`})
+        errorHandler(res, 'error delete all: ', e);
     }
 });
 

@@ -24,15 +24,7 @@ export const addUser = async (data, res) => {
 };
 
 export const loginUser = async (data, res) => {
-    if (data.email) {
-        return await helperForLogin('email', data, res);
-    } else if (data.name) {
-        return await helperForLogin('name', data, res);
-    }
-};
-
-const helperForLogin = async (param, data, res) => {
-    const candidate = await UserSchema.findOne({[param]: data[param]});
+    const candidate = await helperForLogin(data);
     const passwordResult = bcrypt.compareSync(data.password, candidate.password);
     if (passwordResult) {
         const key = config.get('jwtKey');
@@ -45,9 +37,18 @@ const helperForLogin = async (param, data, res) => {
             expiresIn: 3600,
             token: `Bearer ${token}`,
             name: candidate.name,
+            email: candidate.email,
             userId: candidate._id
         }
     } else {
         return res.status(401).json({message: `wrong password or ${param}`})
+    }
+};
+
+const helperForLogin = async (data) => {
+    if (data.email) {
+        return UserSchema.findOne({email: data.email});
+    } else if (data.name) {
+        return UserSchema.findOne({name: data.name});
     }
 };

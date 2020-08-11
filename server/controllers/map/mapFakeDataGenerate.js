@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import {mapFakeDataGenerate} from "../../services/map.service";
+import errorHandler from "../../utils/errorHandler";
 const router = Router();
 
 router.get("/generate/random", async (req,res) => {
@@ -7,7 +8,7 @@ router.get("/generate/random", async (req,res) => {
         const data = await mapFakeDataGenerate();
         return res.status(201).json(data);
     } catch (e) {
-        res.status(404).json({message: `error generate data: ${e}`})
+        errorHandler(res, 'error generate data: ', e);
     }
 });
 

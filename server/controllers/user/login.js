@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import {loginUser} from "../../services/user.service";
+import errorHandler from "../../utils/errorHandler";
 const router = Router();
 
 router.post("/login", async (req,res) => {
@@ -7,7 +8,7 @@ router.post("/login", async (req,res) => {
         const data = await loginUser(req.body, res);
         return res.status(200).json(data);
     } catch (e) {
-        res.status(404).json({message: `error login: ${e}`})
+        errorHandler(res, 'error login: ', e);
     }
 });
 

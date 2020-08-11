@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import {mapDelete} from "../../services/map.service";
+import errorHandler from "../../utils/errorHandler";
 const router = Router();
 
 router.delete("/:id", async (req,res) => {
@@ -10,7 +11,7 @@ router.delete("/:id", async (req,res) => {
         }
         return res.status(404).end();
     } catch (e) {
-        res.status(404).json({message: `error delete-id: ${e}`})
+        errorHandler(res, 'error delete-id: ', e);
     }
 });
 
