@@ -26,7 +26,7 @@ export const ValidateMap = ({body}, res, next) => {
 
 export const ValidateUser = ({body}, res, next) => {
     const schema = Joi.object().keys({
-        email: Joi.string().trim().email().required(),
+        email: Joi.string().trim().pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).required(),
         password: Joi.string().trim().min(3).max(20).required(),
         name: Joi.string().trim().min(3).max(20).required(),
     });
