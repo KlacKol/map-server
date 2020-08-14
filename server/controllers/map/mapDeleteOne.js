@@ -1,9 +1,10 @@
 import {Router} from 'express';
 import {mapDelete} from "../../services/map.service";
 import errorHandler from "../../utils/errorHandler";
+import passport from "passport";
 const router = Router();
 
-router.delete("/:id", async (req,res) => {
+router.delete("/:id", passport.authenticate('jwt', {session: false}), async (req,res) => {
     try {
         const success = await mapDelete(req.params.id);
         if (success) {

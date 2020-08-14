@@ -1,4 +1,7 @@
 {
   "port": 5000,
-  "jwtKey": "history-map"
+  "jwtKey": "history-map",
+  "expiresInToken": 10,
+  "expiresInRefreshToken": 900,
+  "refreshKey": "history-map-refresh"
 }

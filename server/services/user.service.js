@@ -4,7 +4,8 @@ import jwt from 'jsonwebtoken';
 import config from "config";
 import errorHandler from "../utils/errorHandler";
 
-
+const expiresInToken = config.get('expiresInToken');
+const expiresInRefreshToken = config.get('expiresInRefreshToken');
 
 export const getUserById = async (id) => {
     return UserSchema.findById(id);
@@ -19,11 +20,7 @@ export const addUser = async (data, res) => {
     const salt = bcrypt.genSaltSync(10);
     data.password = bcrypt.hashSync(data.password, salt);
     const candidate = await UserSchema.create(data);
-    const token = tokenFormation(candidate);
-    return {
-        expiresIn: 3600,
-        token: `Bearer ${token}`,
-    }
+    return tokenFormation(candidate);
 };
 
 export const loginUser = async (data, res) => {
@@ -31,12 +28,7 @@ export const loginUser = async (data, res) => {
     const candidate = await UserSchema.findOne({[param]: data[param]});
     const passwordResult = bcrypt.compareSync(data.password, candidate.password);
     if (passwordResult) {
-
-        const token = tokenFormation(candidate);
-        return {
-            expiresIn: 3600,
-            token: `Bearer ${token}`,
-        }
+        return tokenFormation(candidate)
     } else {
         return res.status(401).json({message: `wrong password or ${param}`})
     }
@@ -55,10 +47,17 @@ const helperForLogin = (data, res) => {
 const tokenFormation = (data) => {
     const key = config.get('jwtKey');
     return jwt.sign({
-        email: data.email,
+        userId: data._id,
         name: data.name,
-        userId: data._id
-    }, key, {expiresIn: 3600});
+        type: 'access'
+    }, key, {expiresIn: expiresInToken});
+};
 
-
-}
+const refreshTokenFormation = (data) => {
+    const key = config.get('refreshKey');
+    return jwt.sign({
+        userId: data._id,
+        name: data.name,
+        type: 'refresh'
+    }, key, {expiresIn: expiresInRefreshToken});
+};
