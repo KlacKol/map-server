@@ -7,7 +7,9 @@
     "start": "node -r esm index.js",
     "dev": "nodemon -r esm index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "fake": "node -r esm server/task/fakeGenerator.js"
+    "fake": "node -r esm server/task/fakeGenerator.js",
+    "up": "docker-compose up -d",
+    "stop": "docker-compose stop"
   },
   "repository": {
     "type": "git",
@@ -38,10 +40,13 @@
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "geolocation-utils": "^1.2.3",
+    "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
     "mongoose": "^5.9.27",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "redis": "^3.0.2",
     "swagger-ui-express": "^4.1.4"
   }
 }

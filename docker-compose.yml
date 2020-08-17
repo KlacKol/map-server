@@ -8,3 +8,9 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: qwe
     ports:
       - "27017:27017"
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+    - "6379:6379"

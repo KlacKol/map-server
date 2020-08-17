@@ -8,6 +8,7 @@ import mapFakeDataGenerate from './controllers/map/mapFakeDataGenerate';
 import mapSearchDate from './controllers/map/mapSearchDate';
 import registrationUser from './controllers/user/registration';
 import loginUser from './controllers/user/login';
+import refreshToken from './controllers/user/refreshToken';
 
 const connect = (app) => {
     app.use('/map', [
@@ -22,7 +23,8 @@ const connect = (app) => {
     ]);
     app.use('/auth', [
         registrationUser,
-        loginUser
+        loginUser,
+        refreshToken
     ])
 };
 

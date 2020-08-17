@@ -1,16 +1,26 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './swagger';
 import bodyParser from 'body-parser';
 import passport from 'passport';
+import redis from 'redis';
 import config from 'config';
 
+import swaggerDocument from './swagger';
 import useControllers from './server/routes';
 import cors from 'cors';
 
 const PORT = config.get('port') || 5000;
 const app = express();
+export const clientRedis = redis.createClient();
+
+clientRedis.on("connect", () => {
+    console.error('Redis client success connected');
+});
+clientRedis.on("error", function(error) {
+    console.error(error);
+});
+
 app.use(passport.initialize());
 require('./server/middlewares/passport')(passport);
 app.use(bodyParser({extended: true}));
