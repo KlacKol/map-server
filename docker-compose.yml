@@ -10,6 +10,7 @@ services:
       - "27017:27017"
   redis:
     image: 'bitnami/redis:latest'
+    restart: always
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:

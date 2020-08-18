@@ -1,6 +1,5 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import jwtDecode from 'jwt-decode';
 import config from "config";
 import createError from 'http-errors'
 
@@ -17,12 +16,14 @@ export const getUserById = async (id) => {
     return UserSchema.findById(id);
 };
 
-export const refreshUserToken = async ({refreshToken, token}) => {
+export const deleteRefToken = async (id) => {
+    return clientRedis.del(`${id}`);
+};
+
+export const refreshUserToken = async ({refreshToken}) => {
     try {
-        console.log(refreshToken)
         return await jwt.verify(refreshToken, refreshKey, async (err, payload) => {
             if (err) {
-                console.log('work here', err);
                 return createError.Unauthorized();
             }
             const refreshInRedis = await clientRedis.get(String(payload.userId));
@@ -36,7 +37,7 @@ export const refreshUserToken = async ({refreshToken, token}) => {
     } catch (e) {
         console.log(e);
     }
-}
+};
 
 
 export const addUser = async (data, res) => {
