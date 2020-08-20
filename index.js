@@ -12,7 +12,10 @@ import cors from 'cors';
 
 const PORT = config.get('port') || 5000;
 const app = express();
-export const clientRedis = redis.createClient();
+export const clientRedis = redis.createClient({
+    port: 6379,
+    host: 'redis'
+});
 
 clientRedis.on("connect", () => {
     console.error('Redis client success connected');
@@ -29,7 +32,7 @@ useControllers(app);
 
 async function start() {
     try {
-        await mongoose.connect('mongodb://map:map@localhost:27017/history-map',
+        await mongoose.connect('mongodb://map:map@mongo:27017/history-map',
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
@@ -37,7 +40,7 @@ async function start() {
             }
             );
         app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-        app.listen(PORT, () => {
+        app.listen(PORT, "0.0.0.0",() => {
             console.log('START ' + PORT)
         })
     } catch (e) {

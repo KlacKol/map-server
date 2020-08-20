@@ -25,6 +25,10 @@ export const schema = new Schema({
         required: true,
         max: new Date(),
     },
+    userId: {
+        type: String,
+        required: true,
+    }
 });
 
 export const MapSchema = model('geo', schema);

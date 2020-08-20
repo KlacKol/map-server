@@ -6,6 +6,7 @@ export const ValidateMap = ({body}, res, next) => {
         lng: Joi.number().greater(-180).less(180).required(),
         description: Joi.string().trim().min(20).max(200).required(),
         date: Joi.date().max('now').required(),
+        userId: Joi.required()
     });
 
     const _validationOptions = {

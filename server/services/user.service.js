@@ -51,7 +51,7 @@ export const addUser = async (data, res) => {
     const token = tokenFormation(candidate._id, candidate.name);
     const refreshToken = refreshTokenFormation(candidate._id, candidate.name);
     await saveToRedisRfToken(refreshToken, candidate._id);
-    return {token, refreshToken};
+    return {token, refreshToken, userId: candidate._id};
 };
 
 export const loginUser = async (data, res) => {
@@ -63,7 +63,7 @@ export const loginUser = async (data, res) => {
         const refreshToken = refreshTokenFormation(candidate._id, candidate.name);
         if (passwordResult) {
             await saveToRedisRfToken(refreshToken, candidate._id);
-            return {token, refreshToken}
+            return {token, refreshToken, userId: candidate._id}
         } else {
             return res.status(401).json({message: `wrong password or ${param}`})
         }

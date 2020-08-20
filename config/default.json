@@ -1,5 +1,5 @@
 {
-  "port": 5000,
+  "port": 8080,
   "jwtKey": "history-map",
   "refreshKey": "history-map-refresh",
   "expiresInToken": 900,
