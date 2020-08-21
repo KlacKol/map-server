@@ -17,12 +17,13 @@ export const mapAdd = async (data) => {
 export const mapFakeDataGenerate = async () => {
     const data = [];
 
-    for(let i = 0; i<1000; i++) {
+    for(let i = 0; i<100; i++) {
         let geo = new MapSchema({
             lat: faker.address.latitude(),
             lng: faker.address.longitude(),
             description: faker.lorem.words(10),
             date: faker.date.past(),
+            userId: {}
         });
         data.push(geo);
     }
