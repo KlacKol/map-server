@@ -37,7 +37,7 @@
     "config": "^3.3.1",
     "cors": "^2.8.5",
     "esm": "^3.2.25",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "faker": "^4.1.0",
     "geolocation-utils": "^1.2.3",
     "http-errors": "^1.8.0",
